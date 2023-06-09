@@ -1,0 +1,41 @@
+module.exports = {
+  root: true,
+  extends: [
+    '@react-native-community',
+    'plugin:import/react-native',
+    'plugin:sonarjs/recommended',
+    'plugin:promise/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'sonarjs', 'import', 'promise'],
+  rules: {
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    'no-shadow': 'off',
+    'no-unused-vars': 'off',
+    'react-native/no-inline-styles': 'off',
+    'no-spaced-func': 'off',
+    'no-duplicate-imports': 'error',
+    'comma-dangle': 'off',
+    'radix': 'off',
+    'react/destructuring-assignment': ['error', 'always'],
+    'prettier/prettier': 'off',
+    'dot-notation': 'off',
+    'import/prefer-default-export': 'off',
+    'promise/always-return': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-native/no-single-element-style-arrays': 'error',
+    'sonarjs/prefer-immediate-return': 'off',
+    'sonarjs/prefer-single-boolean-return': 'off',
+    'sonarjs/no-nested-template-literals': 'off',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {},
+    },
+  },
+};
