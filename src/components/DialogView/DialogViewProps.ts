@@ -7,6 +7,5 @@ export type DialogViewProps = {
   animationTime?: number;
   backdropColor?: string;
   overlayStyle?: ViewStyle;
-  activeBackdrop?: boolean;
-  hideModal?: () => void;
+  onPressBackdrop?: () => void;
 };

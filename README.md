@@ -60,15 +60,14 @@ import { DialogViewView } from 'react-native-dialog-view';
 
 ## Props
 
-| Name           | Required | Type      | Description                                                                          |
-| -------------- | -------- | --------- | ------------------------------------------------------------------------------------ |
-| visible        | required | boolean   | This variable is used to display the overview                                        |
-| children       | required | ReactNode | -                                                                                    |
-| animationTime  | optional | number    | This variable is used to set the speed of the entrance/exit animation of the overlay |
-| hideModal      | optional | function  | This function is called when the exit animation of the Dialog is finished            |
-| backdropColor  | optional | string    | This variable is used to change the background color of the overlay                  |
-| overlayStyle   | optional | ViewStyle | This prop can be used to change the style of the overlay                             |
-| activeBackdrop | optional | boolean   | This prop can be used to call for `hideModal` when the user press on the overlay     |
+| Name            | Required | Type      | Description                                                                          |
+| --------------- | -------- | --------- | ------------------------------------------------------------------------------------ |
+| visible         | required | boolean   | This variable is used to display the overview                                        |
+| children        | required | ReactNode | -                                                                                    |
+| animationTime   | optional | number    | This variable is used to set the speed of the entrance/exit animation of the overlay |
+| onPressBackdrop | optional | function  | This function is called when the use presses on the overlay                          |
+| backdropColor   | optional | string    | This variable is used to change the background color of the overlay                  |
+| overlayStyle    | optional | ViewStyle | This prop can be used to change the style of the overlay                             |
 
 ## Example
 

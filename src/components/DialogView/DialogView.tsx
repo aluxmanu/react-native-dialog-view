@@ -20,48 +20,43 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
     animationTime = ANIMATION_DIALOG_VIEW,
     overlayStyle,
     backdropColor = 'transparent',
-    activeBackdrop = false,
-    hideModal,
+    onPressBackdrop,
   } = props;
   const [isModalVisible, setIsModalVisible] = useState(visible);
   const styles = useMemo(() => styleSet, []);
   const animatedStyle = useAnimatedStyle(() => {
-    const newOpacity = withTiming(isModalVisible || visible ? 1 : 0, {
+    const newOpacity = withTiming(visible ? 1 : 0, {
       duration: animationTime,
     });
-    const newTranslateY = withTiming(isModalVisible || visible ? 0 : 100);
+    const newTranslateY = withTiming(visible ? 0 : 100);
     return {
       opacity: newOpacity,
       transform: [{ translateY: newTranslateY }],
     };
-  }, [isModalVisible, visible]);
+  }, [visible]);
 
   useEffect(() => {
     if (visible) {
       setIsModalVisible(true);
     } else {
-      setTimeout(() => {
-        setIsModalVisible(false);
-        hideModal?.();
-      }, animationTime);
+      setModalHidden();
     }
   }, [visible]);
 
-  useEffect(() => {
-    if (!isModalVisible) {
-      setTimeout(() => {
-        hideModal?.();
-      }, animationTime);
-    }
-  }, [isModalVisible]);
+  const setModalHidden = () => {
+    setTimeout(() => {
+      setIsModalVisible(false);
+    }, animationTime);
+  };
 
   const onPressHide = () => {
-    setIsModalVisible(false);
+    onPressBackdrop?.();
+    setModalHidden();
   };
 
   return (
     <Portal hostName={PORTAL_HOST_NAME}>
-      {visible || isModalVisible ? (
+      {isModalVisible ? (
         <Animated.View
           style={[
             styles.container,
@@ -74,7 +69,7 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
           <TouchableOpacity
             activeOpacity={0}
             onPress={() => {
-              activeBackdrop && onPressHide();
+              onPressHide();
             }}
             style={styles.overlay}
           />
