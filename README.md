@@ -1,4 +1,4 @@
-# react-native-dialog-view [react-native-dialog-view on npm](https://www.npmjs.com/package/react-native-dialog-view)
+# [react-native-dialog-view on npm](https://www.npmjs.com/package/react-native-dialog-view)
 
 The `react-native-dialog-view` is an animated overlay that can help you to display on the screen a pop-up/modal/dialog-view.
 This is a more straightforward solution to the react-native-modal. This implementation is a simpler solution for a modal that is not using the react-native-modal and it uses the react-native-reanimated for a simple animation and the react-native-portal to be above everything.
