@@ -15,27 +15,37 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
     children,
     visible,
     animationTime = ANIMATION_DIALOG_VIEW,
+    overlayStyle,
+    backdropColor = 'transparent',
+    activeBackdrop = false,
     hideModal,
   } = props;
   const [isModalVisible, setIsModalVisible] = useState(visible);
   const styles = useMemo(() => styleSet, []);
   const animatedStyle = useAnimatedStyle(() => {
-    const newOpacity = withTiming(isModalVisible ? 1 : 0, {
+    const newOpacity = withTiming(isModalVisible || visible ? 1 : 0, {
       duration: animationTime,
     });
-    const newTranslateY = withTiming(isModalVisible ? 0 : 100);
+    const newTranslateY = withTiming(isModalVisible || visible ? 0 : 100);
     return {
       opacity: newOpacity,
       transform: [{ translateY: newTranslateY }],
     };
-  }, [isModalVisible]);
+  }, [isModalVisible, visible]);
 
   useEffect(() => {
-    setIsModalVisible(visible);
+    if (visible) {
+      setIsModalVisible(true);
+    } else {
+      setTimeout(() => {
+        setIsModalVisible(false);
+        hideModal?.();
+      }, animationTime);
+    }
   }, [visible]);
 
   useEffect(() => {
-    if (!isModalVisible && visible) {
+    if (!isModalVisible) {
       setTimeout(() => {
         hideModal?.();
       }, animationTime);
@@ -48,11 +58,23 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
 
   return (
     <Portal hostName={PORTAL_HOST_NAME}>
-      {visible ? (
+      {visible || isModalVisible ? (
         <Animated.View
-          style={[styles.container, styles.overlay, animatedStyle]}
+          style={[
+            styles.container,
+            styles.overlay,
+            { backgroundColor: backdropColor },
+            overlayStyle,
+            animatedStyle,
+          ]}
         >
-          <TouchableOpacity onPress={onPressHide} style={styles.overlay} />
+          <TouchableOpacity
+            activeOpacity={0}
+            onPress={() => {
+              activeBackdrop && onPressHide();
+            }}
+            style={styles.overlay}
+          />
           {children}
         </Animated.View>
       ) : null}
