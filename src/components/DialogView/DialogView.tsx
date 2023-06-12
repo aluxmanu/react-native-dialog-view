@@ -8,7 +8,10 @@ import Animated, {
 
 import { DialogViewProps } from './DialogViewProps';
 import { styleSet } from './DialogViewStyle';
-import { ANIMATION_DIALOG_VIEW, PORTAL_HOST_NAME } from 'src/constants/general';
+import {
+  ANIMATION_DIALOG_VIEW,
+  PORTAL_HOST_NAME,
+} from '../../constants/general';
 
 const DialogView: React.FC<DialogViewProps> = (props) => {
   const {
