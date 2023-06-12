@@ -71,6 +71,54 @@ import { DialogViewView } from 'react-native-dialog-view';
 
 ## Example
 
+```js
+import React, { useMemo, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { DialogView } from 'react-native-dialog-view';
+
+const HomeScreen = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  return (
+    <View style={{flex: 1}}>
+      <TouchableOpacity
+        style={{
+          with:100,
+          height:100
+        }}
+        onPress={() => setIsModalVisible(true)}
+      >
+        <Text>{Show modal}</Text>
+      </TouchableOpacity>
+      <DialogView
+        visible={isModalVisible}
+        backdropColor={'rgba(0, 0, 0, 0.2)'}
+        overlayStyle={{ justifyContent: 'center' }}
+        onPressBackdrop={() => setIsModalVisible(true)}
+      >
+        <View style={{
+          width: 100,
+          height: 100
+        }}>
+          <Text style={styles.text}>{This is a modal}</Text>
+          <TouchableOpacity
+            style={{
+              with:100,
+              height:100
+            }}
+            onPress={() => setIsModalVisible(false)}
+          >
+            <Text style={styles.text}>{Hide Modal}</Text>
+          </TouchableOpacity>
+        </View>
+      </DialogView>
+    </View>
+  );
+};
+
+export default HomeScreen;
+```
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

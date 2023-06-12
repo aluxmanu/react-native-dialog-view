@@ -50,8 +50,10 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
   };
 
   const onPressHide = () => {
-    onPressBackdrop?.();
-    setModalHidden();
+    if (onPressBackdrop) {
+      onPressBackdrop();
+      setModalHidden();
+    }
   };
 
   return (
