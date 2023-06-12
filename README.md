@@ -8,14 +8,49 @@ react-native-dialog-view
 npm install react-native-dialog-view
 ```
 
+or
+
+```sh
+yarn add react-native-dialog-view
+```
+
+## Packages
+
+| Package                                                                                | Version   |
+| -------------------------------------------------------------------------------------- | --------- |
+| [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) | `^3.2.0`  |
+| [react-native-portal](https://github.com/gorhom/react-native-portal).                  | `^1.0.14` |
+
+## Setup
+
+Add the `DialogViewProvider` to your App.ts files
+
+```js
+// ...
+
+<Provider store={store}>
+  <DialogViewProvider>
+    <NavigationProvider>
+      <MainNavigator />
+    </NavigationProvider>
+  </DialogViewProvider>
+</Provider>
+```
+
 ## Usage
 
 ```js
-import { DialogViewView } from "react-native-dialog-view";
+import { DialogViewView } from 'react-native-dialog-view';
 
 // ...
 
-<DialogViewView color="tomato" />
+<DialogViewView
+    visible={isVisible}
+    animationTime={300} // default
+    hideModal={hideModal}
+>
+    <YourDesignedModal/>
+</DialogView>
 ```
 
 ## Contributing

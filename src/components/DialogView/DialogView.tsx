@@ -6,17 +6,22 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import type { ModalProps } from './ModalProps';
-import { styleSet } from './ModalStyle';
-import { ANIMATION_MODAL } from 'src/constants/general';
+import { DialogViewProps } from './DialogViewProps';
+import { styleSet } from './DialogViewStyle';
+import { ANIMATION_DIALOG_VIEW, PORTAL_HOST_NAME } from 'src/constants/general';
 
-const Modal: React.FC<ModalProps> = (props) => {
-  const { children, visible, hideModal } = props;
+const DialogView: React.FC<DialogViewProps> = (props) => {
+  const {
+    children,
+    visible,
+    animationTime = ANIMATION_DIALOG_VIEW,
+    hideModal,
+  } = props;
   const [isModalVisible, setIsModalVisible] = useState(visible);
   const styles = useMemo(() => styleSet, []);
   const animatedStyle = useAnimatedStyle(() => {
     const newOpacity = withTiming(isModalVisible ? 1 : 0, {
-      duration: ANIMATION_MODAL,
+      duration: animationTime,
     });
     const newTranslateY = withTiming(isModalVisible ? 0 : 100);
     return {
@@ -33,7 +38,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     if (!isModalVisible && visible) {
       setTimeout(() => {
         hideModal?.();
-      }, ANIMATION_MODAL);
+      }, animationTime);
     }
   }, [isModalVisible]);
 
@@ -42,7 +47,7 @@ const Modal: React.FC<ModalProps> = (props) => {
   };
 
   return (
-    <Portal>
+    <Portal hostName={PORTAL_HOST_NAME}>
       {visible ? (
         <Animated.View
           style={[styles.container, styles.overlay, animatedStyle]}
@@ -55,4 +60,4 @@ const Modal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default React.memo(Modal);
+export default React.memo(DialogView);

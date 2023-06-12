@@ -1,1 +1,2 @@
-export { default as Modal } from './components/Modal';
+export { default as DialogView } from './components/DialogView';
+export { default as DialogViewProvider } from './components/DialogViewProvider';

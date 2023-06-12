@@ -1,3 +1,3 @@
-describe('Modal Component', () => {
+describe('DisplayView Component', () => {
   it('Test', () => {});
 });

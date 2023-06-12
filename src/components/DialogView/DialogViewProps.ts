@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 
-export type ModalProps = {
+export type DialogViewProps = {
   children: ReactNode;
   visible: boolean;
+  animationTime?: number;
   hideModal?: () => void;
 };

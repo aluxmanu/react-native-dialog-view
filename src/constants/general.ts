@@ -1,1 +1,2 @@
-export const ANIMATION_MODAL = 300;
+export const ANIMATION_DIALOG_VIEW = 300;
+export const PORTAL_HOST_NAME = 'dialogView';
