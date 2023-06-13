@@ -5,6 +5,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import { FullWindowOverlay } from 'react-native-screens';
 
 import { DialogViewProps } from './DialogViewProps';
 import { styleSet } from './DialogViewStyle';
@@ -58,26 +59,28 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
 
   return (
     <Portal hostName={PORTAL_HOST_NAME}>
-      {isModalVisible ? (
-        <Animated.View
-          style={[
-            styles.container,
-            styles.overlay,
-            { backgroundColor: backdropColor },
-            overlayStyle,
-            animatedStyle,
-          ]}
-        >
-          <TouchableOpacity
-            activeOpacity={0}
-            onPress={() => {
-              onPressHide();
-            }}
-            style={styles.overlay}
-          />
-          {children}
-        </Animated.View>
-      ) : null}
+      <FullWindowOverlay>
+        {isModalVisible ? (
+          <Animated.View
+            style={[
+              styles.container,
+              styles.overlay,
+              { backgroundColor: backdropColor },
+              overlayStyle,
+              animatedStyle,
+            ]}
+          >
+            <TouchableOpacity
+              activeOpacity={0}
+              onPress={() => {
+                onPressHide();
+              }}
+              style={styles.overlay}
+            />
+            {children}
+          </Animated.View>
+        ) : null}
+      </FullWindowOverlay>
     </Portal>
   );
 };
