@@ -46,11 +46,11 @@ import { DialogViewProvider } from 'react-native-dialog-view';
 ## Usage
 
 ```js
-import { DialogViewView } from 'react-native-dialog-view';
+import { DialogView } from 'react-native-dialog-view';
 
 // ...
 
-<DialogViewView
+<DialogView
     visible={isVisible}
     animationTime={300} // default
     hideModal={hideModal}
