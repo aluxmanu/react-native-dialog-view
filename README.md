@@ -51,24 +51,26 @@ import { DialogView } from 'react-native-dialog-view';
 // ...
 
 <DialogView
-    visible={isVisible}
-    animationTime={300} // default
-    hideModal={hideModal}
+  visible={isVisible}
+  animationTime={300} // default
+  hideModal={hideModal}
 >
-    <YourDesignedModal/>
-</DialogView>
+  <YourDesignedModal />
+</DialogView>;
 ```
 
 ## Props
 
-| Name            | Required | Type      | Description                                                                          |
-| --------------- | -------- | --------- | ------------------------------------------------------------------------------------ |
-| visible         | required | boolean   | This variable is used to display the overview                                        |
-| children        | required | ReactNode | -                                                                                    |
-| animationTime   | optional | number    | This variable is used to set the speed of the entrance/exit animation of the overlay |
-| onPressBackdrop | optional | function  | This function is called when the use presses on the overlay                          |
-| backdropColor   | optional | string    | This variable is used to change the background color of the overlay                  |
-| overlayStyle    | optional | ViewStyle | This prop can be used to change the style of the overlay                             |
+| Name            | Required | Type      | Description                                                                                                         |
+| --------------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------- |
+| visible         | required | boolean   | This variable is used to display the overview                                                                       |
+| children        | required | ReactNode | -                                                                                                                   |
+| animationTime   | optional | number    | This variable is used to set the speed of the entrance/exit animation of the overlay                                |
+| animationIn     | optional | number    | This variable is used to set entry animation for the overlay. Default FadeIn. For more animations check reanimated. |
+| animationOut    | optional | number    | This variable is used to set exit animation for the overlay. Default FadeOut. For more animations check reanimated. |
+| onPressBackdrop | optional | function  | This function is called when the use presses on the overlay                                                         |
+| backdropColor   | optional | string    | This variable is used to change the background color of the overlay                                                 |
+| overlayStyle    | optional | ViewStyle | This prop can be used to change the style of the overlay                                                            |
 
 ## Example
 

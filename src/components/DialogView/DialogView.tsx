@@ -1,10 +1,7 @@
 import { Portal } from '@gorhom/portal';
 import React, { useEffect, useMemo, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
+import { Platform, TouchableOpacity } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { FullWindowOverlay } from 'react-native-screens';
 
 import { DialogViewProps } from './DialogViewProps';
@@ -19,22 +16,14 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
     children,
     visible,
     animationTime = ANIMATION_DIALOG_VIEW,
+    animationIn = FadeIn,
+    animationOut = FadeOut,
     overlayStyle,
     backdropColor = 'transparent',
     onPressBackdrop,
   } = props;
   const [isModalVisible, setIsModalVisible] = useState(visible);
   const styles = useMemo(() => styleSet, []);
-  const animatedStyle = useAnimatedStyle(() => {
-    const newOpacity = withTiming(visible ? 1 : 0, {
-      duration: animationTime,
-    });
-    const newTranslateY = withTiming(visible ? 0 : 100);
-    return {
-      opacity: newOpacity,
-      transform: [{ translateY: newTranslateY }],
-    };
-  }, [visible]);
 
   useEffect(() => {
     if (visible) {
@@ -57,32 +46,38 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
     }
   };
 
-  return (
-    <Portal hostName={PORTAL_HOST_NAME}>
-      <FullWindowOverlay>
-        {isModalVisible ? (
-          <Animated.View
-            style={[
-              styles.container,
-              styles.overlay,
-              { backgroundColor: backdropColor },
-              overlayStyle,
-              animatedStyle,
-            ]}
-          >
-            <TouchableOpacity
-              activeOpacity={0}
-              onPress={() => {
-                onPressHide();
-              }}
-              style={styles.overlay}
-            />
-            {children}
-          </Animated.View>
-        ) : null}
-      </FullWindowOverlay>
-    </Portal>
-  );
+  const getModalComponent = () => {
+    return isModalVisible ? (
+      <Animated.View
+        entering={animationIn}
+        exiting={animationOut}
+        style={[
+          styles.container,
+          styles.overlay,
+          { backgroundColor: backdropColor },
+          overlayStyle,
+        ]}
+      >
+        <TouchableOpacity
+          activeOpacity={0}
+          onPress={() => {
+            onPressHide();
+          }}
+          style={styles.overlay}
+        />
+        {children}
+      </Animated.View>
+    ) : null;
+  };
+
+  const getOSModal = () => {
+    if (Platform.OS === 'ios') {
+      return <FullWindowOverlay>{getModalComponent()}</FullWindowOverlay>;
+    }
+    return getModalComponent();
+  };
+
+  return <Portal hostName={PORTAL_HOST_NAME}>{getOSModal()}</Portal>;
 };
 
 export default React.memo(DialogView);
