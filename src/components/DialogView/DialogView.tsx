@@ -6,10 +6,7 @@ import { FullWindowOverlay } from 'react-native-screens';
 
 import { DialogViewProps } from './DialogViewProps';
 import { styleSet } from './DialogViewStyle';
-import {
-  ANIMATION_DIALOG_VIEW,
-  PORTAL_HOST_NAME,
-} from '../../constants/general';
+import { ANIMATION_DIALOG_VIEW } from '../../constants/general';
 
 const DialogView: React.FC<DialogViewProps> = (props) => {
   const {
@@ -77,7 +74,7 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
     return getModalComponent();
   };
 
-  return <Portal hostName={PORTAL_HOST_NAME}>{getOSModal()}</Portal>;
+  return <Portal>{getOSModal()}</Portal>;
 };
 
 export default React.memo(DialogView);
