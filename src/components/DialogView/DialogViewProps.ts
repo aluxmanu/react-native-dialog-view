@@ -3,23 +3,22 @@ import { ViewStyle } from 'react-native';
 import {
   BaseAnimationBuilder,
   EntryExitAnimationFunction,
-  Keyframe,
 } from 'react-native-reanimated';
+import { ReanimatedKeyframe } from 'react-native-reanimated/lib/typescript/reanimated2/layoutReanimation/animationBuilder/Keyframe';
+
+type EntryOrExitLayoutType =
+  | BaseAnimationBuilder
+  | typeof BaseAnimationBuilder
+  | EntryExitAnimationFunction
+  | ReanimatedKeyframe
+  | any;
 
 export type DialogViewProps = {
   children: ReactNode;
   visible: boolean;
   animationTime?: number;
-  animationIn?:
-    | BaseAnimationBuilder
-    | typeof BaseAnimationBuilder
-    | EntryExitAnimationFunction
-    | Keyframe;
-  animationOut?:
-    | BaseAnimationBuilder
-    | typeof BaseAnimationBuilder
-    | EntryExitAnimationFunction
-    | Keyframe;
+  animationIn?: EntryOrExitLayoutType;
+  animationOut?: EntryOrExitLayoutType;
   backdropColor?: string;
   overlayStyle?: ViewStyle;
   onPressBackdrop?: () => void;

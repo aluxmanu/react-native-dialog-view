@@ -21,7 +21,7 @@ yarn add react-native-dialog-view
 
 | Package                                                                                | Version   |
 | -------------------------------------------------------------------------------------- | --------- |
-| [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) | `^3.2.0`  |
+| [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) | `^3.7.1`  |
 | [react-native-portal](https://github.com/gorhom/react-native-portal)                   | `^1.0.14` |
 | [react-native-screens](https://github.com/software-mansion/react-native-screens)       | `^3.20.0` |
 
