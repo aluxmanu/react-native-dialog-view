@@ -31,9 +31,11 @@ const DialogView: React.FC<DialogViewProps> = (props) => {
   }, [visible]);
 
   const setModalHidden = () => {
-    setTimeout(() => {
-      setIsModalVisible(false);
-    }, animationTime);
+    if (isModalVisible) {
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, animationTime);
+    }
   };
 
   const onPressHide = () => {
