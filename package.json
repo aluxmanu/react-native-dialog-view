@@ -1,6 +1,6 @@
 {
   "name": "react-native-dialog-view",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "react-native-dialog-view",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
